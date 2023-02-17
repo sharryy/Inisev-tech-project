@@ -27,7 +27,7 @@ it('sends email to all subscribers uniquely', function () {
     Mail::assertQueued(PostCreated::class, 2);
 });
 
-it('send no emails if all notifications are read', function () {
+it('send no emails if no notifications are present', function () {
     Mail::fake();
 
     $website = Website::factory()->create();
@@ -40,9 +40,11 @@ it('send no emails if all notifications are read', function () {
         ['users_user_id' => $user2->user_id],
     ]);
 
-    Post::factory()->create([
-        'websites_website_id' => $website->website_id,
-    ]);
+    Post::withoutEvents(function () use ($website) {
+        Post::factory()->create([
+            'websites_website_id' => $website->website_id,
+        ]);
+    });
 
     $user1->unreadNotifications->each(function ($notification) {
         $notification->markAsRead();
