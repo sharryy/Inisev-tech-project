@@ -23,5 +23,7 @@ class PostObserver
         $subscribers->each(function ($subscriber) use ($post) {
             $subscriber->user->notify(new PostCreated($subscriber->user, $post));
         });
+
+        \App\Events\PostCreated::dispatch();
     }
 }
