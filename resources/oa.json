@@ -1,0 +1,17 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Inisev-API",
+        "version": "1.0",
+        "description": "Inisev API Documentation",
+    },
+    "servers": [
+        {
+            "url": "https://api.ini-sev.co.uk/api"
+        }
+    ],
+    "paths": {
+        "/test": {
+        }
+    }
+}
