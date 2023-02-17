@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CsrfCookieController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\WebsiteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,3 +18,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/csrf-cookie', CsrfCookieController::class)->name('csrf-cookie');
+
+Route::post('/website', [WebsiteController::class, 'store'])->name('website.store');
+
+Route::post('/post', [PostController::class, 'store'])->name('post.store');
+
+//Route::
