@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePostRequest;
+use App\Http\Resources\PostResource;
 use App\Http\Services\PostService;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,6 @@ class PostController
         $post = $postService->store($request);
         $post->load('website.users');
 
-        return response()->apiSuccess($post);
+        return response()->apiSuccess(PostResource::make($post));
     }
 }

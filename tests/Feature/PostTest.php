@@ -19,7 +19,7 @@ it('can create a post', function () {
         ->and($data['response']['title'])->toBe($title)
         ->and($data['response']['slug'])->toBe($slug)
         ->and($data['response']['content'])->toBe($content)
-        ->and($data['response']['websites_website_id'])->toBe($website->website_id);
+        ->and($data['response']['website']['website_id'])->toBe($website->website_id);
 
     $this->assertDatabaseCount('posts', 1);
     $this->assertDatabaseHas('posts', [

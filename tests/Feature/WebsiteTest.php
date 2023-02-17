@@ -57,9 +57,9 @@ it('is possible to subscribe to a website', function () {
                 ->where('website_id', $website->website_id)
                 ->where('name', $website->name)
                 ->where('url', $website->url)
-                ->where('users.0.user_id', $user->user_id)
-                ->where('users.0.name', $user->name)
-                ->where('users.0.email', $user->email)
+                ->where('subscribers.0.user_id', $user->user_id)
+                ->where('subscribers.0.name', $user->name)
+                ->where('subscribers.0.email', $user->email)
                 ->etc()
             )->etc()
         );
