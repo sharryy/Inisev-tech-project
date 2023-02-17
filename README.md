@@ -22,7 +22,24 @@ $ composer install
 $ cp .env.example .env
 ```
 
-4. Replace database and mail credentials in .env file
+4. Replace following database and mail credentials in .env file
+
+```bash
+DB_CONNECTION=mysql
+DB_HOST=
+DB_PORT=
+DB_DATABASE=
+DB_USERNAME=
+DB_PASSWORD=
+
+MAIL_DRIVER=
+MAIL_HOST=
+MAIL_PORT=
+MAIL_USERNAME=
+MAIL_PASSWORD=
+MAIL_ENCRYPTION=
+```
+
 5. Generate application key
 
 ```bash
