@@ -41,6 +41,20 @@ $ php artisan migrate
 $ php artisan db:seed
 ```
 
+- Seed database with dummy data
+
+```bash
+php artisan db:seed
+```
+
 - Visit http://127.0.0.1:8000/docs to view the API documentation
 
+### Running the tests
 
+```bash
+$ php artisan test
+```
+
+### License
+
+[MIT](LICENSE)
