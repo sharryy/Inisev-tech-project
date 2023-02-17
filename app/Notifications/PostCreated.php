@@ -5,8 +5,6 @@ namespace App\Notifications;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class PostCreated extends Notification
@@ -47,7 +45,9 @@ class PostCreated extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'message' => 'New post created',
+            'user' => $this->user,
+            'post' => $this->post,
         ];
     }
 }

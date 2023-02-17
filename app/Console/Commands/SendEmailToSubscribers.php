@@ -2,6 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\PostCreated;
+use App\Models\User;
+use Illuminate\Bus\Queueable;
 use Illuminate\Console\Command;
 
 class SendEmailToSubscribers extends Command
@@ -28,5 +31,17 @@ class SendEmailToSubscribers extends Command
     public function handle()
     {
 
+        $this->info("Fetching all users...");
+        $users = User::all();
+
+        $this->info("Sending emails to all users...");
+        $users->each(function ($user) {
+            $user->unreadNotifications->each(function ($notification) use ($user) {
+                \Mail::to($user->email)->queue(new PostCreated($notification->data));
+                $notification->markAsRead();
+            });
+        });
+
+        $this->info("Done!");
     }
 }

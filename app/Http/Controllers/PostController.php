@@ -11,10 +11,7 @@ class PostController
     public function store(CreatePostRequest $request, PostService $postService)
     {
         $post = $postService->store($request);
-
-        if (!$post) {
-            return response()->apiError('Failed to create post', 500);
-        }
+        $post->load('website.users');
 
         return response()->apiSuccess($post);
     }

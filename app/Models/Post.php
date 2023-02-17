@@ -34,4 +34,6 @@ class Post extends Model
     {
         return $this->belongsTo(Website::class, 'websites_website_id', 'website_id');
     }
+
+
 }
