@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return "Health-check. API is working";
 });
 
 Route::view('/docs', 'swagger');
