@@ -3,61 +3,25 @@
 namespace App\Observers;
 
 use App\Models\Post;
+use App\Notifications\PostCreated;
 
 class PostObserver
 {
     /**
      * Handle the Post "created" event.
      *
-     * @param  \App\Models\Post  $post
+     * @param Post $post
      * @return void
      */
-    public function created(Post $post)
+    public function created(Post $post): void
     {
-        //
-    }
+        $subscribers = $post->website->subscribers;
 
-    /**
-     * Handle the Post "updated" event.
-     *
-     * @param  \App\Models\Post  $post
-     * @return void
-     */
-    public function updated(Post $post)
-    {
-        //
-    }
-
-    /**
-     * Handle the Post "deleted" event.
-     *
-     * @param  \App\Models\Post  $post
-     * @return void
-     */
-    public function deleted(Post $post)
-    {
-        //
-    }
-
-    /**
-     * Handle the Post "restored" event.
-     *
-     * @param  \App\Models\Post  $post
-     * @return void
-     */
-    public function restored(Post $post)
-    {
-        //
-    }
-
-    /**
-     * Handle the Post "force deleted" event.
-     *
-     * @param  \App\Models\Post  $post
-     * @return void
-     */
-    public function forceDeleted(Post $post)
-    {
-        //
+        /*
+         * Send notification to all subscribers
+         */
+        $subscribers->each(function ($subscriber) use ($post) {
+            $subscriber->user->notify(new PostCreated($subscriber->user, $post));
+        });
     }
 }

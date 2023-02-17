@@ -13,10 +13,6 @@ class WebsiteController
     {
         $website = $websiteService->create($request);
 
-        if (!$website) {
-            return response()->apiError('Failed to create website', 500);
-        }
-
         return response()->apiSuccess($website);
 
     }
