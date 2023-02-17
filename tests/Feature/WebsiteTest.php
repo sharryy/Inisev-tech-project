@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\User;
+use App\Models\Website;
+use Illuminate\Testing\Fluent\AssertableJson;
+
 it('is possible to create a website', function () {
     $this->assertDatabaseCount('websites', 0);
 
@@ -38,4 +42,41 @@ it('is not possible to create a website with an invalid url', function () {
         'url'  => 'invalid-url',
     ])->assertStatus(422);
 });
+
+it('is possible to subscribe to a website', function () {
+    $website = Website::factory()->create();
+
+    $this->assertDatabaseCount('subscriptions', 0);
+
+    $user = User::factory()->create();
+    $this->postJson(route('website.subscribe', $website), [
+        'users_user_id' => $user->user_id,
+    ])->assertStatus(200)
+        ->assertJson(fn(AssertableJson $json) => $json
+            ->has('response', fn($json) => $json
+                ->where('website_id', $website->website_id)
+                ->where('name', $website->name)
+                ->where('url', $website->url)
+                ->where('users.0.user_id', $user->user_id)
+                ->where('users.0.name', $user->name)
+                ->where('users.0.email', $user->email)
+                ->etc()
+            )->etc()
+        );
+});
+
+it('not possible for user to subscribe to a website twice', function () {
+    $website = Website::factory()->create();
+    $user = User::factory()->create();
+
+    $this->postJson(route('website.subscribe', $website), [
+        'users_user_id' => $user->user_id,
+    ])->assertStatus(200);
+
+    $this->postJson(route('website.subscribe', $website), [
+        'users_user_id' => $user->user_id,
+    ])->assertStatus(422)
+        ->assertJsonValidationErrors('users_user_id');
+});
+
 

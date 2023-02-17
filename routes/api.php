@@ -23,4 +23,4 @@ Route::post('/website', [WebsiteController::class, 'store'])->name('website.stor
 
 Route::post('/post', [PostController::class, 'store'])->name('post.store');
 
-//Route::
+Route::post('/website/{website}/subscription', [WebsiteController::class, 'subscribe'])->name('website.subscribe');

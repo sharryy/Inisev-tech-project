@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreWebsiteRequest;
+use App\Http\Requests\SubscribeWebsiteRequst;
 use App\Http\Services\WebsiteService;
 use Illuminate\Http\Request;
 
@@ -18,5 +19,14 @@ class WebsiteController
 
         return response()->apiSuccess($website);
 
+    }
+
+    public function subscribe(SubscribeWebsiteRequst $request, WebsiteService $websiteService)
+    {
+        $website = $websiteService->subscribe($request);
+
+        $website->load('users');
+
+        return response()->apiSuccess($website);
     }
 }
