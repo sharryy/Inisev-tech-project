@@ -42,6 +42,6 @@ class SendEmailToSubscribers extends Command
             });
         });
 
-        $this->info("Done!");
+        $this->info("Emails sent successfully!");
     }
 }
