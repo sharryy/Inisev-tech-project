@@ -46,14 +46,6 @@ it('send no emails if no notifications are present', function () {
         ]);
     });
 
-    $user1->unreadNotifications->each(function ($notification) {
-        $notification->markAsRead();
-    });
-
-    $user2->unreadNotifications->each(function ($notification) {
-        $notification->markAsRead();
-    });
-
     $this->artisan('send:email');
 
     Mail::assertNothingQueued();

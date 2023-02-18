@@ -1,6 +1,10 @@
 ## Subscription Service
 
-Please visit [problem](docs/challenge.md) for more details about the challenge.
+Create a simple subscription platform(only RESTful APIs with MySQL) in which users can subscribe to a website (there can
+be multiple websites in the system). Whenever a new post is published on a particular website, all it's subscribers
+shall receive an email with the post title and description in it
+
+> **Note:** Please visit [DOCS](docs/db_structure.png) for database design
 
 ## Getting Started
 
